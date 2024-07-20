@@ -50,3 +50,8 @@ DB_NAME=name of the database
 DB_USER=username of the database
 DB_PASSWORD=database password
 DB_ENCRYPT=false
+
+## License
+
+This project is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License. You may view the code but cannot use it for commercial purposes. See the [LICENSE](./LICENSE) file for more details.
+
