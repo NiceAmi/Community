@@ -1,0 +1,80 @@
+body {
+    background-color: #f0e7db;
+    background-image: repeating-linear-gradient(45deg,
+            transparent,
+            transparent 1px,
+            rgba(0, 0, 0, 0.05) 1px,
+            rgba(0, 0, 0, 0.05) 2px);
+    margin: 0;
+}
+
+#txtPage {
+    font-size: x-large;
+    font-weight: 400;
+    margin-top: 6%;
+}
+
+#homeTxt {
+    background-color: #fcf6ef;
+    border-radius: 5%;
+    scale: 1.05;
+    padding: 1%;
+}
+
+h1 {
+    text-decoration: underline;
+    font-family: "Lora", serif;
+
+}
+
+.headLine {
+    padding-top: 1%;
+    padding-left: 8%;
+    font-family: "Lilita One", sans-serif;
+    font-size: xxx-large;
+    scale: 1.0;
+    text-shadow: 2px 2px 4px black;
+}
+
+.custoumLogo {
+    color: brown;
+    text-decoration: none;
+}
+
+.custoumLogo:hover {
+    color: rgb(20, 100, 150);
+}
+
+.text-muted {
+    padding-left: 10%;
+}
+
+#about-link {
+    background-color: #f0dcdc80;
+    padding: 6px 20px;
+    border-radius: 50%;
+    text-decoration: none;
+}
+
+#about-link:hover {
+    background-color: #c5c6e4;
+}
+
+#terms {
+    margin-bottom: 10%;
+
+}
+
+.leadText-center {
+    font-weight: 400;
+    text-align: justify;
+}
+
+#userCard {
+    font-size: larger;
+}
+
+#mainBtn {
+    padding-bottom: 2%;
+
+}
