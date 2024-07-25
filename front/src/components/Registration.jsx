@@ -182,18 +182,6 @@ export const RegistrationComp = () => {
                         />
                     </div>
                     <div className="col-md-6">
-                        <label htmlFor="StreetNumber" className="form-label">Street Number</label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="StreetNumber"
-                            name="StreetNumber"
-                            placeholder="Type your street number..."
-                            value={newUser.StreetNumber}
-                            onChange={handleInputChange}
-                        />
-                    </div>
-                    <div className="col-md-6">
                         <label htmlFor="Address" className="form-label">Address</label>
                         <input
                             type="text"
@@ -219,6 +207,18 @@ export const RegistrationComp = () => {
                                 ))}
                             </ul>
                         )}
+                    </div>
+                    <div className="col-md-6">
+                        <label htmlFor="StreetNumber" className="form-label">Street Number</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="StreetNumber"
+                            name="StreetNumber"
+                            placeholder="Type your street number..."
+                            value={newUser.StreetNumber}
+                            onChange={handleInputChange}
+                        />
                     </div>
                     <div className="col-md-6">
                         <label htmlFor="Email" className="form-label">Email</label>
