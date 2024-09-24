@@ -23,27 +23,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage});
 
-router.post('/register', async (req, res) => {
-    const { userName, age, email, password } = req.body;
-    try {
-        const response = await usersBLL.register(userName, age, email, password);
-        res.status(response === "User registered successfully" ? 201 : 400).json({ message: response });
-    } catch (error) {
-        console.error('Error in register route:', error);
-        res.status(500).json({ message: 'Internal server error' });
-    }
-});
 
-router.post('/login', async (req, res) => {
-    const { userName, password } = req.body;
-    try {
-        const response = await usersBLL.login(userName, password);
-        res.status(response.token ? 200 : 400).json(response.token ? response : { message: response });
-    } catch (error) {
-        console.error('Error in login route:', error);
-        res.status(500).json({ message: 'Internal server error' });
-    }
-});
 
 router.use(checkToken);
 
