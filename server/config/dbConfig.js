@@ -1,13 +1,14 @@
 const sql = require('mssql');
+require('dotenv').config();
 
 const config = {
-  server: process.env.DB_SERVER || 'AMI\\SQLEXPRESS',
-  database: process.env.DB_NAME || 'Community',
+  server: process.env.DB_SERVER,
+  database: process.env.DB_NAME,
   options: {
     encrypt: process.env.DB_ENCRYPT === 'true',
     enableArithAbort: true
   },
-  user: process.env.DB_USER || 'connect',
+  user: process.env.DB_USER,
   password: process.env.DB_PASSWORD
 };
 
