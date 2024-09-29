@@ -63,11 +63,13 @@ export const MessagesComp = () => {
 
     const fetchMessages = async () => {
         if (!receiverId || !user || !user.token) return;
+
         try {
             const response = await axios.get(
                 `http://localhost:5000/api/messages/between/${user.userId}/${receiverId}`,
                 { headers: { Authorization: user.token } }
             );
+
             if (Array.isArray(response.data)) {
                 dispatch({ type: 'SET_MESSAGES', payload: response.data });
             }
@@ -79,6 +81,7 @@ export const MessagesComp = () => {
     const sendMessage = async (e) => {
         e.preventDefault();
         if (!receiverId || !user || !user.token) return;
+
         const messageData = {
             SenderID: user.userId,
             ReceiverID: parseInt(receiverId),
@@ -111,18 +114,19 @@ export const MessagesComp = () => {
         navigate('/profile');
     };
 
+
     return (
         <div className="d-flex flex-column" style={{ height: 'calc(100vh - 56px)' }}>
             <div className="flex-grow-1 overflow-hidden">
                 <div className="container-fluid h-100 p-0">
                     <div className="row h-100 g-0">
-                        {/* Conversations Sidebar */}
                         <div className="col-md-4 border-end bg-light overflow-auto h-100">
                             <div className="headLine">
                                 <Link to={'/homepage'} className="custoumLogo">COMMUNITY
                                     <img src="../src/assets/icons8-handshake-94.png" alt="handshake icon" style={{ width: '12%', height: '3%', marginRight: '8px' }} />
                                 </Link>            </div>
                             <div className="p-4">
+
                                 <h2 className="mb-4 text-primary fw-bold">
                                     <i className="bi bi-chat-dots-fill me-2"></i>Conversations
                                 </h2>
@@ -162,11 +166,10 @@ export const MessagesComp = () => {
                                     })}
                             </div>
                         </div>
-                        {/* Message Area */}
+
                         <div className="col-md-8 d-flex flex-column h-100">
                             {receiverId ? (
                                 <>
-                                    {/* Header */}
                                     <div className="p-4 border-bottom bg-white">
                                         <h3 className="mb-0 fw-bold d-flex align-items-center">
                                             <div className="bg-primary rounded-circle d-flex justify-content-center align-items-center me-3" style={{ width: '40px', height: '40px' }}>
@@ -175,23 +178,40 @@ export const MessagesComp = () => {
                                             {usernames[receiverId] || `User ${receiverId}`}
                                         </h3>
                                     </div>
-                                    {/* Messages */}
+
                                     <div className="flex-grow-1 p-4 overflow-auto">
-                                        {messages.slice(0).reverse().map((message, index) => (
-                                            <div key={index} className={`d-flex ${message.SenderID === user.userId ? "justify-content-end" : "justify-content-start"} mb-3`}>
-                                                <div
-                                                    className={`p-3 rounded-3 shadow-sm ${message.SenderID === user.userId ? "bg-primary text-white" : "bg-light"}`}
-                                                    style={{ maxWidth: '75%' }}
-                                                >
-                                                    <p className="mb-0">{message.MessageText || message.MessageTEXT}</p>
-                                                    <small className={`d-block mt-2 ${message.SenderID === user.userId ? "text-white-50" : "text-muted"}`}>
-                                                        {message.TIMESTAMP && new Date(message.TIMESTAMP).toLocaleString()}
-                                                    </small>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                    {/* Message Input */}
+    {messages
+        .filter(message => 
+            (message.SenderID === user.userId && message.ReceiverID === parseInt(receiverId)) ||
+            (message.SenderID === parseInt(receiverId) && message.ReceiverID === user.userId)
+        )
+        .slice(0).reverse().map((message, index) => (
+            <div key={index} className={`d-flex ${message.SenderID === user.userId ? "justify-content-end" : "justify-content-start"} mb-3`}>
+                <div 
+                    className={`p-3 rounded-3 shadow-sm ${message.SenderID === user.userId ? "bg-primary text-white" : "bg-light"}`}
+                    style={{maxWidth: '75%'}}
+                >
+                    <div className="d-flex align-items-center mb-2">
+                        <div className={`rounded-circle me-2 ${message.SenderID === user.userId ? "bg-white" : "bg-primary"}`} 
+                             style={{width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                            <span className={`fw-bold ${message.SenderID === user.userId ? "text-primary" : "text-white"}`} style={{fontSize: '12px'}}>
+                                {(message.SenderID === user.userId ? user.Username : usernames[receiverId])?.charAt(0).toUpperCase()}
+                            </span>
+                        </div>
+                        <span className={`fw-bold ${message.SenderID === user.userId ? "text-white" : "text-primary"}`} style={{fontSize: '0.9rem'}}>
+                            {message.SenderID === user.userId ? user.Username : usernames[receiverId]}
+                        </span>
+                    </div>
+                    <p className="mb-0">{message.MessageText || message.MessageTEXT}</p>
+                    <small className={`d-block mt-2 ${message.SenderID === user.userId ? "text-white-50" : "text-muted"}`}>
+                        {message.TIMESTAMP && new Date(message.TIMESTAMP).toLocaleString()}
+                    </small>
+                </div>
+            </div>
+        ))
+    }
+</div>
+
                                     <div className="p-4 border-top bg-white">
                                         <form onSubmit={sendMessage}>
                                             <div className="input-group">
